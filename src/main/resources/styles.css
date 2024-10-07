@@ -1,0 +1,15 @@
+.side-bar-styling {
+    -fx-background-color: #ffffff;
+
+    -fx-border-style: solid;        /* Sets the border style to solid */
+    -fx-border-width: 0 1px 0 0;   /* Sets the border width: top, right, bottom, left */
+    -fx-border-color: rgb(31, 31, 31); /* Only the bottom border is colored */
+}
+
+.footer-styling {
+    -fx-font-style: italic;
+    -fx-background-color: #dfdfdf;
+    -fx-alignment: center;
+
+    -fx-padding: 1.5px;
+}
