@@ -1,15 +1,58 @@
-.side-bar-styling {
-    -fx-background-color: #ffffff;
+/*
+    Global styles can be registered here. You can use these styles throught nodes in
+    the application by appending these methods: .getStyleClass().add("class-name-goes-here")
+*/
 
-    -fx-border-style: solid;        /* Sets the border style to solid */
-    -fx-border-width: 0 1px 0 0;   /* Sets the border width: top, right, bottom, left */
-    -fx-border-color: rgb(31, 31, 31); /* Only the bottom border is colored */
+.top-nav-bar-styling {
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 0; /* Sets the border width: top, right, bottom, left */
+    -fx-border-color: rgb(148, 148, 148);
+
+    -fx-padding: 4px;
 }
+
+
+/*------------------------------------------------------------------------------*/
+
+
+.side-bar-option-styling {
+    /* -fx-border-style: solid;
+    -fx-border-width: 1 0 1 0;
+    -fx-border-color: rgb(148, 148, 148); */
+}
+
+.menu-icon-styling {
+    -fx-fit-width: 10px;  /* Set the width */
+    -fx-fit-height: 10px; /* Set the height */
+}
+
+.side-bar-styling {
+    -fx-background-color: #e4e4e4;
+
+    -fx-border-style: solid;
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color: rgb(148, 148, 148);
+    
+}
+
+.side-bar-item-styling {
+    -fx-padding: 4px;
+}
+
+.header {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+/*------------------------------------------------------------------------------*/
+
 
 .footer-styling {
     -fx-font-style: italic;
-    -fx-background-color: #dfdfdf;
+    -fx-text-fill: rgb(0, 0, 0);
     -fx-alignment: center;
 
+    -fx-background-color: #9b9b9b;
+    
     -fx-padding: 1.5px;
 }

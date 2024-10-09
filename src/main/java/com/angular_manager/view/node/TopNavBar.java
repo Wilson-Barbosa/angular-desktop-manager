@@ -1,20 +1,17 @@
-package com.angular_manager.view;
+package com.angular_manager.view.node;
 
-import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class TopNavBar extends HBox {
 
     // Constructor
     public TopNavBar(){
-        super();
-        super.setBorder(Border.stroke(Color.BLACK));
+        super(10); // add some spacing to the box
+
+        // TODO I need to change this later
         super.getChildren().addAll(new Text("Preferences"), new Text("Help"), new Text("About"));
+        super.getStyleClass().add("top-nav-bar-styling");
     }
-
-
 
 }

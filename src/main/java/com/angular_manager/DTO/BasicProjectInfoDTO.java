@@ -1,0 +1,48 @@
+package com.angular_manager.DTO;
+
+/**
+ * Models a single entry inside the ProjectList JSON file
+ */
+public class BasicProjectInfoDTO {
+
+    private int id;
+    private String projectName;
+    private String projectPath;
+
+    // Empty Constructor
+    public BasicProjectInfoDTO() {
+    }
+
+    // Full-Args Constructor
+    public BasicProjectInfoDTO(int id, String projectName, String projectPath) {
+        this.id = id;
+        this.projectName = projectName;
+        this.projectPath = projectPath;
+    }
+
+    // Setters and Getters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getProjectPath() {
+        return projectPath;
+    }
+
+    public void setProjectPath(String projectPath) {
+        this.projectPath = projectPath;
+    }
+
+}
