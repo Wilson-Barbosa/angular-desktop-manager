@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.angular_manager.DTO.BasicProjectInfoDTO;
-import com.angular_manager.utli.TerminalPrinter;
+import com.angular_manager.util.TerminalPrinter;
 
 /**
  * Class that performs operations on the JSON file where the projects are store
@@ -17,9 +17,13 @@ import com.angular_manager.utli.TerminalPrinter;
 public class JsonManipulator {
 
     // specifies the location where the json is located and the name of the files inside of it
-    private final String jsonDirectory = "C:\\angular-manager";
-    private final String fileName = "project-list.json";
-    // TODO maybe I can add another json that handles configuration, like preferences and such?
+    private final String jsonDirectory;
+    private final String fileName;
+
+    public JsonManipulator(String jsonDirectory, String fileName){
+        this.jsonDirectory = jsonDirectory;
+        this.fileName = fileName;
+    }
 
     // creates a new JSON file to store the list of projects
     public void createJSONFile() {
@@ -27,14 +31,14 @@ public class JsonManipulator {
         // first I check if the directory exists, if not then create it
         Path folder = Paths.get(jsonDirectory);
         if (Files.exists(folder)) {
-            TerminalPrinter.printMessage("folder 'angular-manager' already exists on path C:\\");;
+            TerminalPrinter.printMessage("folder " + jsonDirectory + " already exists.");
         } else {
-            TerminalPrinter.printMessage("folder 'angular-manager' does not exists, creating a new one...");
+            TerminalPrinter.printMessage("folder " + jsonDirectory + " does not exists, creating a new one...");
 
             // Tries to create the folder
             try {
                 Files.createDirectory(folder);
-                TerminalPrinter.printMessage("folder 'angular-manager' was created successfully on path C:\\");
+                TerminalPrinter.printMessage("folder " + jsonDirectory + " was created successfully.");
             } catch (Exception e) {
                 TerminalPrinter.printMessage("an unexpected error has occurred, check it out: ");
                 e.printStackTrace();
@@ -48,9 +52,9 @@ public class JsonManipulator {
 
             // obs: createNewFile() returns a boolean
             if (file.createNewFile()) {
-                TerminalPrinter.printMessage("file 'project-list.json' was created on path C:\\angular-manager");
+                TerminalPrinter.printMessage("file " + fileName + " was created on path " + jsonDirectory);
             } else {
-                TerminalPrinter.printMessage("file 'project-list.json' already exists on path C:\\angular-manager");
+                TerminalPrinter.printMessage("file " + fileName + " already exists on path " + jsonDirectory);
             }
 
         } catch (Exception e) {

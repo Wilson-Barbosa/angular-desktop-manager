@@ -16,8 +16,11 @@ public class MainContentPane extends GridPane {
         button.setOnAction(e -> {
 
             // Lets add an intance of the json manipulator and iteract with it
-            JsonManipulator jsonManipulator = new JsonManipulator();
-            jsonManipulator.createJSONFile();
+            JsonManipulator jsonManipulator1 = new JsonManipulator("C:\\angular-manager", "project-list.json");
+            jsonManipulator1.createJSONFile();
+
+            JsonManipulator jsonManipulator2 = new JsonManipulator("C:\\angular-manager", "app-config.json");
+            jsonManipulator2.createJSONFile();
 
         });
     }

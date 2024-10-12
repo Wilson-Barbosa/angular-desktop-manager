@@ -1,4 +1,4 @@
-package com.angular_manager.utli;
+package com.angular_manager.util;
 
 public abstract class TerminalPrinter {
     

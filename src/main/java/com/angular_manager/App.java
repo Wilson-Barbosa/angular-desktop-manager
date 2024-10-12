@@ -23,14 +23,14 @@ public class App extends Application {
         // For now the app will have only one scene
         Scene mainScene = MainScene.createMainScene();
 
+        // Calling the method that settles the initial configuration for the application
+        InitialStateConfig.setApplicationInitialState();
+
         // Sets some Stage's properties and assigns the scene to it
         stage.setTitle("Angular Desktop Manager v1.0");
         stage.getIcons().add(new Image("file:src/main/resources/images/icon.png")); // adds an angular icon to the app
         stage.setScene(mainScene);
         stage.show();
-
-        // Calling the method that settles the initial configuration for the application
-        InitialStateConfig.setApplicationInitialState();
     }
 
 
