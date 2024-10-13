@@ -10,17 +10,17 @@ public class MainContentPane extends GridPane {
     public MainContentPane(){
         super();
 
-        Button button = new Button("Fire event");
+        Button button = new Button("Add");
         super.getChildren().add(button);
         
         button.setOnAction(e -> {
 
             // Lets add an intance of the json manipulator and iteract with it
             JsonManipulator jsonManipulator1 = new JsonManipulator("C:\\angular-manager", "project-list.json");
-            jsonManipulator1.createJSONFile();
+            jsonManipulator1.createJSONFileOnFolder();
 
-            JsonManipulator jsonManipulator2 = new JsonManipulator("C:\\angular-manager", "app-config.json");
-            jsonManipulator2.createJSONFile();
+
+            // Adiciona um nova key no json
 
         });
     }

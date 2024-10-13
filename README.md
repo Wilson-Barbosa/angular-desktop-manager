@@ -31,5 +31,6 @@ Inspired on the git's GUI I decided to built my own GUI application that would a
 
 ## Technologies
 - JavaFX version 21
-- Visual Studio Code as my IDE
 - Jpackage to package the application
+- JSON-Java library, also known as org.json, to perfom operations on, well, json files
+- Visual Studio Code as my IDE

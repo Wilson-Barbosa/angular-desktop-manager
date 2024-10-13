@@ -4,10 +4,9 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.angular_manager.DTO.BasicProjectInfoDTO;
+import org.json.JSONObject;
+
 import com.angular_manager.util.TerminalPrinter;
 
 /**
@@ -20,13 +19,14 @@ public class JsonManipulator {
     private final String jsonDirectory;
     private final String fileName;
 
-    public JsonManipulator(String jsonDirectory, String fileName){
+    // Constructor
+    public JsonManipulator(String jsonDirectory, String fileName) {
         this.jsonDirectory = jsonDirectory;
         this.fileName = fileName;
     }
 
-    // creates a new JSON file to store the list of projects
-    public void createJSONFile() {
+    // Creates a new JSON file and a new folder if needed be 
+    public void createJSONFileOnFolder() {
 
         // first I check if the directory exists, if not then create it
         Path folder = Paths.get(jsonDirectory);
@@ -43,7 +43,6 @@ public class JsonManipulator {
                 TerminalPrinter.printMessage("an unexpected error has occurred, check it out: ");
                 e.printStackTrace();
             }
-
         }
 
         // Now I need to create the .json inside the directory
@@ -61,21 +60,12 @@ public class JsonManipulator {
             TerminalPrinter.printMessage("an unexpected error has occurred, check it out: ");
             e.printStackTrace();
         }
-
     }
 
-    // recovers All projects from the .json file
-    public List<BasicProjectInfoDTO> getAllProjects() {
-
-        List<BasicProjectInfoDTO> projectList = new ArrayList<>();
-        // here I need to call the method that will read the .json file and recover the info
-
-        return projectList;
-    }
-
-    public void addNewProject() {
+    public void addKey(){
+        
+        JSONObject jo = new JSONObject();
 
     }
-
 
 }
