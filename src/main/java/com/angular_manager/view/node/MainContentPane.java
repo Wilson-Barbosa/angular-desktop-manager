@@ -1,27 +1,32 @@
 package com.angular_manager.view.node;
 
 import com.angular_manager.model.json.AngularProjectJsonManipulator;
-import com.angular_manager.model.json.JsonManipulator;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 public class MainContentPane extends GridPane {
     
     public MainContentPane(){
         super();
 
-        Button button = new Button("Add keys");
-        super.getChildren().add(button);
+        AngularProjectJsonManipulator json = new AngularProjectJsonManipulator("C:\\angular-manager", "project-list.json");
+
+        Button createFolder = new Button("Create folder");
+        Button createFile = new Button("Create file");
+
+        HBox hBox = new HBox();
+        hBox.getChildren().addAll(createFolder, createFile);
+
+        super.getChildren().add(hBox);
+
+        createFile.setOnAction(e -> {
+            json.createFile();            
+        });
         
-        button.setOnAction(e -> {
-
-            // Lets add an intance of the json manipulator and iteract with it
-            AngularProjectJsonManipulator json = new AngularProjectJsonManipulator("C:\\angular-manager", "project-list.json");
-            json.createJSONFileOnFolder();
-
-            json.addNewProject(null);
-
+        createFolder.setOnAction(e -> {
+            json.createDirectory();
         });
     }
     

@@ -20,6 +20,18 @@ public class AngularProjectJsonManipulator extends JsonManipulator {
         super(jsonDirectory, fileName);
     }
 
+
+    // Tries to access the file and recovers the array of projects store there
+    public JSONArray getAllProjectsFromJson(){
+
+        // First I create a JSONArray and then write the information from the file into it
+        JSONArray projectList = new JSONArray();
+
+        // Then I return it
+        return projectList;
+
+    }
+
     
     public void addNewProject(BasicProjectInfoDTO basicProjectInfoDTO){
 
@@ -34,10 +46,13 @@ public class AngularProjectJsonManipulator extends JsonManipulator {
         try {
             Files.write(Paths.get("C:\\angular-manager\\project-list.json"), jo.toString().getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
+    }
+
+    public void removeProject(){
+        
     }
     
 }
