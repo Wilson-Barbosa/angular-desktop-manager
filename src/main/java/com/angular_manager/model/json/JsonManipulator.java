@@ -1,17 +1,14 @@
-package com.angular_manager.model;
+package com.angular_manager.model.json;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.json.JSONObject;
-
 import com.angular_manager.util.TerminalPrinter;
 
 /**
- * Class that performs operations on the JSON file where the projects are store
- * offers various methods for creating and altering the file or its folder
+ * Class that performs operations on the JSON files
  */
 public class JsonManipulator {
 
@@ -62,10 +59,5 @@ public class JsonManipulator {
         }
     }
 
-    public void addKey(){
-        
-        JSONObject jo = new JSONObject();
-
-    }
 
 }

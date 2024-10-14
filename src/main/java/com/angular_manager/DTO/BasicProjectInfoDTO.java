@@ -9,10 +9,6 @@ public class BasicProjectInfoDTO {
     private String projectName;
     private String projectPath;
 
-    // Empty Constructor
-    public BasicProjectInfoDTO() {
-    }
-
     // Full-Args Constructor
     public BasicProjectInfoDTO(int id, String projectName, String projectPath) {
         this.id = id;
