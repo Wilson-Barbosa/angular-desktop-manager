@@ -3,14 +3,14 @@ package com.angular_manager.DTO;
 /**
  * Models a single entry inside the ProjectList JSON file
  */
-public class BasicProjectInfoDTO {
+public class ProjectListItemDTO {
 
     private int id;
     private String projectName;
     private String projectPath;
 
     // Full-Args Constructor
-    public BasicProjectInfoDTO(int id, String projectName, String projectPath) {
+    public ProjectListItemDTO(int id, String projectName, String projectPath) {
         this.id = id;
         this.projectName = projectName;
         this.projectPath = projectPath;

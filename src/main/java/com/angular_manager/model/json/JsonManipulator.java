@@ -12,8 +12,8 @@ import com.angular_manager.util.TerminalPrinter;
 public class JsonManipulator {
 
     // specifies the location where the json is located and the name of the files inside of it
-    private final String directory; // this is an absolute path
-    private final String fileName;
+    private final String directory; // directory is an absolute path
+    private final String fileName; // fileName must contain the .json extension 
 
     // Constructor
     public JsonManipulator(String directory, String fileName) {
@@ -24,17 +24,15 @@ public class JsonManipulator {
     // Creates a directory on a given path 
     public void createDirectory() {
         try {
-
             if (doesFolderExists()) {
-                TerminalPrinter.printMessage("folder " + directory + " already exists");
+                TerminalPrinter.printMessage("Folder " + directory + " already exists");
             } else {
-                TerminalPrinter.printMessage("folder " + directory + " does not exist, trying to create it...");
+                TerminalPrinter.printMessage("Folder " + directory + " does not exist, trying to create it...");
                 Files.createDirectory(Paths.get(directory)); // creates the actual directory
-                TerminalPrinter.printMessage("folder " + directory + " created successfully");
+                TerminalPrinter.printMessage("Folder " + directory + " created successfully");
             }
-
         } catch (Exception e) {
-            TerminalPrinter.printMessage("an error has occureed while creating " + directory + ": ");
+            TerminalPrinter.printMessage("An error has occureed while creating " + directory + ": ");
             e.printStackTrace();
         }
     }
@@ -43,20 +41,17 @@ public class JsonManipulator {
     public void createFile() {
         try {
             if(!doesFolderExists()){
-                TerminalPrinter.printMessage("folder " + directory + " does not exist. No file was created");
+                TerminalPrinter.printMessage("Folder " + directory + " does not exist. No file was created");
             } else
             if (doesFileExists()) {
-                TerminalPrinter.printMessage("file " + fileName + " already exists on path " + directory);
+                TerminalPrinter.printMessage("File " + fileName + " already exists on path " + directory);
             } else {
-                TerminalPrinter.printMessage("file " + fileName + " does not exist. Trying to create it...");
-                Path dir = Paths.get(directory); // Directory path
-                Path file = dir.resolve(fileName); // File path inside the directory
-                Files.createFile(file);
-                TerminalPrinter.printMessage("file " + fileName + " created successfully");
+                TerminalPrinter.printMessage("File " + fileName + " does not exist. Trying to create it...");
+                Files.createFile(getAbsolutePath()); // creates the actual file
+                TerminalPrinter.printMessage("File " + fileName + " created successfully");
             }
-
         } catch (Exception e) {
-            TerminalPrinter.printMessage("an error has occureed while creating " + directory + ": ");
+            TerminalPrinter.printMessage("An error has occureed while creating " + directory + ": ");
         }
     }
 
@@ -66,10 +61,9 @@ public class JsonManipulator {
         return Files.exists(dir) && Files.isDirectory(dir);
     }
 
-    // Returns true if the file existis on a given directory
+    // Returns true if the file exists on a given directory
     public boolean doesFileExists() {
-        Path path = Paths.get(directory + "\\" + fileName);
-        return Files.exists(path);
+        return Files.exists(getAbsolutePath());
     }
 
     // checks if the file has a .json extension
@@ -77,8 +71,27 @@ public class JsonManipulator {
         return fileName.endsWith(".json");
     }
 
-    public String getAbsoluteFilePath(){
-        return directory + "/" + fileName;
+    // Returns the absolut path as a string
+    public String getAbsoluteFilePathAsString(){
+        return directory + "\\" + fileName;
+    }
+
+    // Returns the absolut path as a Path object
+    public Path getAbsolutePath(){
+        return Paths.get(getAbsoluteFilePathAsString());
+    }
+
+    // Returns the content of the file as String
+    public String getFileAsSingleString(){
+        Path path = getAbsolutePath();
+
+        try {
+            return Files.readString(path);
+        } catch (Exception e) {
+            TerminalPrinter.printMessage("Could not read file: ");
+            e.printStackTrace();
+            return null; // TODO how do I treat this better? Maybe create an exception?
+        }
     }
 
 
