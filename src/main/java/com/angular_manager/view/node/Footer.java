@@ -1,7 +1,6 @@
 package com.angular_manager.view.node;
 
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class Footer extends VBox {
