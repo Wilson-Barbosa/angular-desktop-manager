@@ -3,6 +3,7 @@ package com.angular_manager.model.json;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 import com.angular_manager.util.TerminalPrinter;
 
@@ -21,7 +22,6 @@ public class JsonManipulator {
         this.fileName = fileName;
     }
 
-    // Creates a directory on a given path 
     public void createDirectory() {
         try {
             if (doesFolderExists()) {
@@ -61,27 +61,23 @@ public class JsonManipulator {
         return Files.exists(dir) && Files.isDirectory(dir);
     }
 
-    // Returns true if the file exists on a given directory
     public boolean doesFileExists() {
         return Files.exists(getAbsolutePath());
     }
 
-    // checks if the file has a .json extension
     public boolean isTheFileJson(){
         return fileName.endsWith(".json");
     }
 
-    // Returns the absolut path as a string
     public String getAbsoluteFilePathAsString(){
         return directory + "\\" + fileName;
     }
 
-    // Returns the absolut path as a Path object
     public Path getAbsolutePath(){
         return Paths.get(getAbsoluteFilePathAsString());
     }
 
-    // Returns the content of the file as String
+    // Returns the file's content as String
     public String getFileAsSingleString(){
         Path path = getAbsolutePath();
 
@@ -91,6 +87,18 @@ public class JsonManipulator {
             TerminalPrinter.printMessage("Could not read file: ");
             e.printStackTrace();
             return null; // TODO how do I treat this better? Maybe create an exception?
+        }
+
+    }
+
+    public void writeIntoFileByTruncanting(byte[] byteArray, Path path){
+        try {
+            TerminalPrinter.printMessage("Trying to save new file...");
+            Files.write(path, byteArray, StandardOpenOption.TRUNCATE_EXISTING);
+            TerminalPrinter.printMessage("File saved successfully on " + getAbsoluteFilePathAsString());
+        } catch (Exception e) {
+            TerminalPrinter.printMessage("Could not write into " + getAbsoluteFilePathAsString() + " :");
+            e.printStackTrace();
         }
     }
 

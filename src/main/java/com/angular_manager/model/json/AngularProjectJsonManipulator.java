@@ -1,10 +1,5 @@
 package com.angular_manager.model.json;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -26,12 +21,12 @@ public class AngularProjectJsonManipulator extends JsonManipulator {
 
     // Tries to access the file and recovers the array of projects stored there
     public JSONArray getProjectListAsJsonArray(){
-        JSONArray projectList = new JSONArray(getFileAsSingleString());
-        return projectList;
+        // TODO it's imperative to treat the case of a null getFileAsSingleString() == null, but how can I do it?
+        return new JSONArray(getFileAsSingleString());
     }
 
     // Adds one project to list (single operation)     
-    public void addNewProject(ProjectListItemDTO dto){
+    public void addNewProject(ProjectListItemDTO projectListItemDTO){
 
         // Only writes into if a folder and file both exist
         if(doesFolderExists() && doesFileExists()) {
@@ -39,24 +34,13 @@ public class AngularProjectJsonManipulator extends JsonManipulator {
         
             // Creates the JsonObject and assign the dto's attributes to it
             JSONObject jsonToBeSaved = new JSONObject();
-            jsonToBeSaved.put(ProjectJsonStructure.ID.toString(), dto.getId());
-            jsonToBeSaved.put(ProjectJsonStructure.PROJECT_NAME.toString(), dto.getProjectName());
-            jsonToBeSaved.put(ProjectJsonStructure.PROJECT_PATH.toString(), dto.getProjectPath());
+            jsonToBeSaved.put(ProjectJsonStructure.ID.toString(), projectListItemDTO.getId());
+            jsonToBeSaved.put(ProjectJsonStructure.PROJECT_NAME.toString(), projectListItemDTO.getProjectName());
+            jsonToBeSaved.put(ProjectJsonStructure.PROJECT_PATH.toString(), projectListItemDTO.getProjectPath());
     
             projectList.put(jsonToBeSaved); // adds the project to the list
     
-            // now I transform the JSONArray back to a string then transforms it to an array of bytes
-            byte[] jsonArrayAsString = projectList.toString().getBytes();
-            
-            // then I try writting it into a file
-            try {
-                TerminalPrinter.printMessage("Trying to save new file...");
-                Files.write(getAbsolutePath(), jsonArrayAsString, StandardOpenOption.TRUNCATE_EXISTING);
-                TerminalPrinter.printMessage("File saved successfully on " + getAbsoluteFilePathAsString());
-            } catch (IOException e) {
-                TerminalPrinter.printMessage("Could not write into " + getAbsoluteFilePathAsString() + " :");
-                e.printStackTrace();
-            }
+            writeIntoFileByTruncanting(projectList.toString().getBytes(), getAbsolutePath());
         } else {
             TerminalPrinter.printMessage("Could not write file, because either the folder or file do not exist.");
         }
@@ -70,21 +54,11 @@ public class AngularProjectJsonManipulator extends JsonManipulator {
         super.createFile(); // creates the file
 
         if(doesFolderExists() && doesFileExists()) {
-            byte[] squareBrackets = "[]".getBytes(); // Then writes the [] inside the empty file
-
-            try {
-                TerminalPrinter.printMessage("trying to save new file...");
-                Files.write(getAbsolutePath(), squareBrackets, StandardOpenOption.TRUNCATE_EXISTING);
-                TerminalPrinter.printMessage("file saved successfully on " + getAbsoluteFilePathAsString());
-            } catch (IOException e) {
-                TerminalPrinter.printMessage("could not write into " + getAbsoluteFilePathAsString() + " :");
-                e.printStackTrace();
-            }
+            byte[] squareBrackets = "[]".getBytes();
+            writeIntoFileByTruncanting(squareBrackets, getAbsolutePath());
         }
-
     }
 
-    // Adds a list of projects to the file
     public void addAllProjects(){
 
     }
