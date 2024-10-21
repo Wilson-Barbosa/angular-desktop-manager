@@ -1,7 +1,10 @@
 package com.angular_manager.view.node;
 
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
+import org.kordamp.ikonli.bootstrapicons.BootstrapIcons;
+import org.kordamp.ikonli.javafx.FontIcon;
+
+import com.angular_manager.DTO.ProjectListItemDTO;
+
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
@@ -10,46 +13,48 @@ import javafx.scene.text.Text;
  */
 public class ProjectSideBarItem extends HBox {
 
-    private String projectPath;
+    private ProjectListItemDTO projectInformation;
 
     // Constructor
-    public ProjectSideBarItem(String angularProjectName, String projectPath) {
-        super();
-        super.getChildren().add(new Text(angularProjectName));
-        super.getStyleClass().add("side-bar-item-styling");
-        this.projectPath = projectPath;
+    public ProjectSideBarItem(ProjectListItemDTO projectListItemDTO) {
+        super(5);
+        this.projectInformation = projectListItemDTO;
+
+        FontIcon folderIcon = new FontIcon(BootstrapIcons.FOLDER2);
+        Text projectName = new Text(projectListItemDTO.getProjectName());
+
+        folderIcon.getStyleClass().add("icon-project");
+
+        super.getStyleClass().addAll("side-bar-item-styling", "clickable");
+        super.getChildren().addAll(folderIcon, projectName);
 
         registerHanlder();
     }
 
     // Maps the appropriate EventHandler to this Node
     public void registerHanlder(){
-        ItemClickEventHandler handler = new ItemClickEventHandler();
-        super.setOnMouseClicked(handler);
+        this.setOnMouseClicked(e-> {
+            System.out.println("Item " + projectInformation.getId() + " was clicked");
+            displayProjectInformationById(projectInformation.getId());
+        });
     }
 
+    public void displayProjectInformationById(int id){
 
-    // Setters and Getters
-    public String getProjectPath() {
-        return projectPath;
-    }
-
-    public void setProjectPath(String projectPath) {
-        this.projectPath = projectPath;
-    }
-
-
-
-    // Class that handles the event fired when a user clicks on a item in the list
-    class ItemClickEventHandler implements EventHandler<MouseEvent> {
-
-    // On every mouse click the method below will be called 
-    @Override
-    public void handle(MouseEvent e) {
-        System.out.println("Item was clicked");
         
+
     }
-}
+
+
+    public ProjectListItemDTO getProjectInformation() {
+        return projectInformation;
+    }
+
+    public void setProjectInformation(ProjectListItemDTO projectInformation) {
+        this.projectInformation = projectInformation;
+    }
+
+
 
 }
 

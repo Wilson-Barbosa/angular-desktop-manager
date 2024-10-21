@@ -41,4 +41,9 @@ public class ProjectListItemDTO {
         this.projectPath = projectPath;
     }
 
+    @Override
+    public String toString() {
+        return "ProjectListItemDTO [id=" + id + ", projectName=" + projectName + ", projectPath=" + projectPath + "]";
+    }
+
 }

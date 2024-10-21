@@ -1,5 +1,8 @@
 package com.angular_manager.model.json;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -18,8 +21,6 @@ public class AngularProjectJsonManipulator extends JsonManipulator {
         super(jsonDirectory, fileName);
     }
 
-
-    // Tries to access the file and recovers the array of projects stored there
     public JSONArray getProjectListAsJsonArray(){
         // TODO it's imperative to treat the case of a null getFileAsSingleString() == null, but how can I do it?
         return new JSONArray(getFileAsSingleString());
@@ -59,12 +60,27 @@ public class AngularProjectJsonManipulator extends JsonManipulator {
         }
     }
 
-    public void addAllProjects(){
+    public void addProjectsToJsonFile(List<ProjectListItemDTO> projectListItemDTOs){
 
-    }
-
-    public void removeProject(){
+        // Only writes into if a folder and file both exist
+        if(doesFolderExists() && doesFileExists()) {
+            JSONArray projectList = getProjectListAsJsonArray();
         
+            projectListItemDTOs.forEach(project -> {
+                
+                // Creates the JsonObject and assign the dto's attributes to it
+                JSONObject jsonToBeSaved = new JSONObject();
+                jsonToBeSaved.put(ProjectJsonStructure.ID.toString(), project.getId());
+                jsonToBeSaved.put(ProjectJsonStructure.PROJECT_NAME.toString(), project.getProjectName());
+                jsonToBeSaved.put(ProjectJsonStructure.PROJECT_PATH.toString(), project.getProjectPath());
+        
+                projectList.put(jsonToBeSaved); // adds the project to the list
+            });
+    
+            writeIntoFileByTruncanting(projectList.toString().getBytes(), getAbsolutePath());
+        } else {
+            TerminalPrinter.printMessage("Could not write file, because either the folder or file do not exist.");
+        }
     }
     
 }

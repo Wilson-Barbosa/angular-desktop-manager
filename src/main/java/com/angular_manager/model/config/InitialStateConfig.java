@@ -1,12 +1,54 @@
 package com.angular_manager.model.config;
 
+import com.angular_manager.model.json.AngularProjectJsonManipulator;
+import com.angular_manager.model.json.ConfigurationJsonManipulator;
+
 /**
- * When the application runs this class' method will be called
+ * When the application runs this class' methods will be called
  */
 public class InitialStateConfig {
+
+    // TODO This is temporary, soon I will substitue these hardcoded values
+    private static final ConfigurationJsonManipulator configJson = new ConfigurationJsonManipulator(
+        "C:\\angular-manager", 
+        "configuration.json"
+    );
+
+    private static final AngularProjectJsonManipulator angularJson = new AngularProjectJsonManipulator(
+        "C:\\angular-manager", 
+        "project-list.json"
+    );
     
     public static void setApplicationInitialState(){
-        
+        setConfigJsonState();
+        setAngularProjectJsonState();
     }
+
+
+    // Method that creates the folder a file to hold the angular project list
+    // It will be called on every application run
+    private static void setAngularProjectJsonState(){
+        if(!angularJson.doesFolderExists()) {
+            angularJson.createFolder();
+        }
+
+        if(!angularJson.doesFileExists()) {
+            angularJson.createFile();
+        }
+    }
+
+    // Method that creates the folder a file to hold the angular project list
+    // It will be called on every application run
+    private static void setConfigJsonState(){
+        if(!configJson.doesFolderExists()) {
+            configJson.createFolder();
+        }
+
+        if(!configJson.doesFileExists()) {
+            configJson.createFile();
+        }
+    }
+
+
 
 }

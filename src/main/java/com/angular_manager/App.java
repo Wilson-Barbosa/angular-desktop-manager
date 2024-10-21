@@ -20,11 +20,11 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        // For now the app will have only one scene
-        Scene mainScene = MainScene.createMainScene();
-
         // Calling the method that settles the initial configuration for the application
         InitialStateConfig.setApplicationInitialState();
+
+        // For now the app will have only one scene
+        Scene mainScene = MainScene.createMainScene();
 
         // Sets some Stage's properties and assigns the scene to it
         stage.setTitle("Angular Desktop Manager v1.0");

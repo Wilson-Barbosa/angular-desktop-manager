@@ -22,7 +22,7 @@ public class JsonManipulator {
         this.fileName = fileName;
     }
 
-    public void createDirectory() {
+    public void createFolder() {
         try {
             if (doesFolderExists()) {
                 TerminalPrinter.printMessage("Folder " + directory + " already exists");
@@ -77,18 +77,20 @@ public class JsonManipulator {
         return Paths.get(getAbsoluteFilePathAsString());
     }
 
+    // TODO this looks a bad approach, but it will suffice for now
+    public String addJsonExtension(String file){
+        return file.concat(".json");
+    }
+
     // Returns the file's content as String
     public String getFileAsSingleString(){
-        Path path = getAbsolutePath();
-
         try {
-            return Files.readString(path);
+            return Files.readString(getAbsolutePath());
         } catch (Exception e) {
             TerminalPrinter.printMessage("Could not read file: ");
             e.printStackTrace();
             return null; // TODO how do I treat this better? Maybe create an exception?
         }
-
     }
 
     public void writeIntoFileByTruncanting(byte[] byteArray, Path path){

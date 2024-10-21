@@ -9,7 +9,7 @@ module com.angular_manager {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.bootstrapicons;
     requires java.logging;
-
+    requires java.desktop;
 
     opens com.angular_manager to javafx.fxml;
     exports com.angular_manager;

@@ -3,7 +3,6 @@ package com.angular_manager.view.scene;
 import com.angular_manager.view.node.Footer;
 import com.angular_manager.view.node.MainContentPane;
 import com.angular_manager.view.node.ProjectListSideBar;
-import com.angular_manager.view.node.ProjectSideBarItem;
 import com.angular_manager.view.node.TopNavBar;
 
 import javafx.scene.Scene;
@@ -20,10 +19,6 @@ public abstract class MainScene {
 
         // Create the SideBar
         ProjectListSideBar sideBar = new ProjectListSideBar();
-        // TODO temporary, change this later
-        for(int i = 0; i < 20; i++) {
-            sideBar.addSingleItem(new ProjectSideBarItem("Project Name " + i, null));
-        }
 
         // Create the RightScreen
         MainContentPane mainContent = new MainContentPane();
@@ -32,7 +27,6 @@ public abstract class MainScene {
         SplitPane splitPane = new SplitPane();
         splitPane.getItems().addAll(sideBar, mainContent);
         splitPane.setDividerPosition(0, 0.15); // gives a percentagem of the screen for the sideBar
-
 
         // Couples everything together on a BorderPane
         BorderPane borderPane = new BorderPane();

@@ -1,60 +1,74 @@
 package com.angular_manager.view.node;
 
+import org.kordamp.ikonli.bootstrapicons.BootstrapIcons;
+import org.kordamp.ikonli.javafx.FontIcon;
+
+import com.angular_manager.DTO.ProjectListItemDTO;
+import com.angular_manager.controller.AngularController;
+
+import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 /**
  * Class that represents a left SideBar, where the project's names are displayed
  */
 public class ProjectListSideBar extends ScrollPane {
 
-    private VBox vBox;
+    private final VBox sideBar = new VBox(7);
+    private final AngularController angularController = new AngularController();
     
     // Create the SideBar as a VBox inside a ScrollPane
     public ProjectListSideBar(){
         super(); // creates the ScrollPane
+        super.getStyleClass().addAll("side-bar-styling"); // adds css class
+        super.setContent(sideBar); // puts the vbox as the content of scrollPane
 
-        super.getStyleClass().add("side-bar-styling"); // adds css class
-
-        this.vBox = new VBox(7); // creates the vBox with some spacing
-
-        super.setContent(vBox); // puts the vbox as the content of scrollPane
+        createIconBar();
             
         // Enable scrolling
         this.setFitToWidth(true); // Ensure that items stretch to fit the width
         this.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Vertical scrollbar appears when needed
 
-        addHeaderToBar();
-    }
-
-    // Method that adds a new Item inside the SideBar
-    public void addSingleItem(ProjectSideBarItem item){
-        getvBox().getChildren().add(item);
+        if(angularController.canSeachForProjectsOnAppInit()) {
+            clearAndReloadProjectList();
+        }
     }
 
     // Adds an HBox with some options
-    private void addHeaderToBar(){
 
-        HBox optionsMenu = new HBox();
-        optionsMenu.getStyleClass().add("side-bar-option-styling"); // adds css class
+    private void createIconBar(){
+        HBox iconBar = new HBox(3);
 
-        Text header = new Text("Project List");
-        header.getStyleClass().add("header");
+        FontIcon reloadIcon = new FontIcon(BootstrapIcons.ARROW_COUNTERCLOCKWISE);
+        reloadIcon.getStyleClass().addAll("clickable");
+
+        iconBar.getChildren().addAll(reloadIcon);
+        iconBar.setAlignment(Pos.BASELINE_RIGHT);
+        iconBar.getStyleClass().add("icon-bar");
         
-        this.vBox.getChildren().addAll(optionsMenu, header);
+        this.sideBar.getChildren().addAll(iconBar);
+
+        // Registers the eventHandlers
+        reloadIcon.setOnMouseClicked(e -> {
+            clearAndReloadProjectList();
+        });
     }
 
-    // Setters and Getters
-    public VBox getvBox() {
-        return vBox;
+    private void addSingleProjectToSideBar(ProjectListItemDTO projectListItemDTO){
+        ProjectSideBarItem item = new ProjectSideBarItem(projectListItemDTO);
+        this.sideBar.getChildren().addAll(item);
     }
 
-    public void setvBox(VBox vBox) {
-        this.vBox = vBox;
-    }
+    private void clearAndReloadProjectList(){
+        // clears all the nodes, expect the iconBar
+        this.sideBar.getChildren().remove(1, this.sideBar.getChildren().size());
 
+        // After everything is cleared then the nodes can be added again
+        angularController.getAllProjectsFromFile().forEach(project ->{
+            addSingleProjectToSideBar(project);
+        });
+    }
     
-
 }
