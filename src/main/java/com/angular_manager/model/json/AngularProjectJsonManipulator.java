@@ -1,12 +1,12 @@
 package com.angular_manager.model.json;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.angular_manager.DTO.ProjectListItemDTO;
+import com.angular_manager.enums.FileName;
 import com.angular_manager.enums.ProjectJsonStructure;
 import com.angular_manager.util.TerminalPrinter;
 
@@ -17,12 +17,19 @@ import com.angular_manager.util.TerminalPrinter;
 public class AngularProjectJsonManipulator extends JsonManipulator {
 
     // Constructor
-    public AngularProjectJsonManipulator(String jsonDirectory, String fileName) {
+    public AngularProjectJsonManipulator(String jsonDirectory, FileName fileName) {
         super(jsonDirectory, fileName);
     }
 
     public JSONArray getProjectListAsJsonArray(){
         // TODO it's imperative to treat the case of a null getFileAsSingleString() == null, but how can I do it?
+
+        if(getFileAsSingleString() == null) {
+            // maybe I can create and new empty file I an error occurs (if the method returns null that is)
+            createFile();
+        }
+        
+        // Then I can run the method again and, this time it will for sure return a valid string
         return new JSONArray(getFileAsSingleString());
     }
 

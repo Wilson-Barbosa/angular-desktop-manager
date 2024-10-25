@@ -3,11 +3,11 @@ package com.angular_manager.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.angular_manager.DTO.ProjectListItemDTO;
 import com.angular_manager.enums.ConfigJsonStructure;
+import com.angular_manager.enums.FileName;
 import com.angular_manager.enums.ProjectJsonStructure;
 import com.angular_manager.model.json.AngularProjectJsonManipulator;
 import com.angular_manager.model.json.ConfigurationJsonManipulator;
@@ -19,13 +19,11 @@ public class AngularController {
 
     public AngularController() {
         this.angularProjectJsonManipulator = new AngularProjectJsonManipulator(
-            "C:\\angular-manager",
-            "project-list.json"
+            "C:\\angular-manager", FileName.PROJECT_LIST_JSON
         );
 
         this.configurationJsonManipulator = new ConfigurationJsonManipulator(
-            "C:\\angular-manager", 
-            "configuration.json"
+            "C:\\angular-manager", FileName.CONFIGURATION_JSON
         );
     }
 
@@ -45,8 +43,6 @@ public class AngularController {
         return projectListItemDTOList;
     }
 
-    public boolean canSeachForProjectsOnAppInit(){
-        return configurationJsonManipulator.getBooleanValueFromKey(ConfigJsonStructure.SEARCH_FOR_PROJECTS_ON_APP_INIT);
-    }
+
 
 }

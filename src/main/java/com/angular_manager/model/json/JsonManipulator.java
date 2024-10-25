@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
+import com.angular_manager.enums.FileName;
 import com.angular_manager.util.TerminalPrinter;
 
 /**
@@ -12,16 +13,22 @@ import com.angular_manager.util.TerminalPrinter;
  */
 public class JsonManipulator {
 
-    // specifies the location where the json is located and the name of the files inside of it
-    private final String directory; // directory is an absolute path
-    private final String fileName; // fileName must contain the .json extension 
+    private final Path folderPath;
+    private final Path filePath;
+
+    // Used for printing on the console
+    private final String directory; 
+    private final String fileName; 
 
     // Constructor
-    public JsonManipulator(String directory, String fileName) {
+    public JsonManipulator(String directory, FileName fileName) {
         this.directory = directory;
-        this.fileName = fileName;
+        this.fileName = fileName.getName();
+        this.folderPath = Paths.get(directory);
+        this.filePath = Paths.get(directory, fileName.getName());
     }
 
+    // Creates an empty folder
     public void createFolder() {
         try {
             if (doesFolderExists()) {
@@ -37,7 +44,10 @@ public class JsonManipulator {
         }
     }
 
-    // Creates a file inside the directory (if it exists that is)
+    /*
+     * Creates a file inside the directory (if it exists that is)
+     * By default the file will be empty
+     */
     public void createFile() {
         try {
             if(!doesFolderExists()){
@@ -57,12 +67,11 @@ public class JsonManipulator {
 
     // Returns true if the folder exists from that path
     public boolean doesFolderExists() {
-        Path dir = Paths.get(directory);
-        return Files.exists(dir) && Files.isDirectory(dir);
+        return Files.exists(folderPath) && Files.isDirectory(folderPath);
     }
 
     public boolean doesFileExists() {
-        return Files.exists(getAbsolutePath());
+        return Files.exists(filePath);
     }
 
     public boolean isTheFileJson(){
@@ -70,26 +79,21 @@ public class JsonManipulator {
     }
 
     public String getAbsoluteFilePathAsString(){
-        return directory + "\\" + fileName;
+        return filePath.toString();
     }
 
     public Path getAbsolutePath(){
-        return Paths.get(getAbsoluteFilePathAsString());
-    }
-
-    // TODO this looks a bad approach, but it will suffice for now
-    public String addJsonExtension(String file){
-        return file.concat(".json");
+        return filePath;
     }
 
     // Returns the file's content as String
     public String getFileAsSingleString(){
         try {
-            return Files.readString(getAbsolutePath());
+            return Files.readString(filePath);
         } catch (Exception e) {
             TerminalPrinter.printMessage("Could not read file: ");
             e.printStackTrace();
-            return null; // TODO how do I treat this better? Maybe create an exception?
+            return null;
         }
     }
 

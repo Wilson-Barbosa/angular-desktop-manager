@@ -1,5 +1,8 @@
 package com.angular_manager.model.config;
 
+import com.angular_manager.enums.ConfigJsonStructure;
+import com.angular_manager.enums.FileName;
+import com.angular_manager.model.AngularProjectSearcher;
 import com.angular_manager.model.json.AngularProjectJsonManipulator;
 import com.angular_manager.model.json.ConfigurationJsonManipulator;
 
@@ -10,18 +13,18 @@ public class InitialStateConfig {
 
     // TODO This is temporary, soon I will substitue these hardcoded values
     private static final ConfigurationJsonManipulator configJson = new ConfigurationJsonManipulator(
-        "C:\\angular-manager", 
-        "configuration.json"
+        "C:\\angular-manager", FileName.CONFIGURATION_JSON
     );
 
     private static final AngularProjectJsonManipulator angularJson = new AngularProjectJsonManipulator(
-        "C:\\angular-manager", 
-        "project-list.json"
+        "C:\\angular-manager", FileName.PROJECT_LIST_JSON
     );
-    
+
+    // Execute all routines here
     public static void setApplicationInitialState(){
         setConfigJsonState();
         setAngularProjectJsonState();
+        setProjectSearchInitialState();
     }
 
 
@@ -49,6 +52,14 @@ public class InitialStateConfig {
         }
     }
 
+    private static void setProjectSearchInitialState(){
+        if(canSeachForProjectsOnAppInit()) {
+            AngularProjectSearcher.searchForAngularProject();
+        }
+    }
 
+    private static boolean canSeachForProjectsOnAppInit(){
+        return configJson.getBooleanValueFromKey(ConfigJsonStructure.SEARCH_FOR_PROJECTS_ON_APP_INIT);
+    }
 
 }
