@@ -9,6 +9,11 @@ public class ProjectListItemDTO {
     private String projectName;
     private String projectPath;
 
+    // Empty constructor
+    public ProjectListItemDTO(){
+
+    }
+
     // Full-Args Constructor
     public ProjectListItemDTO(int id, String projectName, String projectPath) {
         this.id = id;

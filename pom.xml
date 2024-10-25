@@ -11,6 +11,13 @@
     </properties>
     <dependencies>
 
+        <!-- https://central.sonatype.com/artifact/io.reactivex.rxjava3/rxjava -->
+        <dependency>
+            <groupId>io.reactivex.rxjava3</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>3.1.9</version>
+        </dependency>
+
         <!-- https://kordamp.org/ikonli/ -->
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>

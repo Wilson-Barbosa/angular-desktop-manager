@@ -10,7 +10,9 @@ module com.angular_manager {
     requires org.kordamp.ikonli.bootstrapicons;
     requires java.logging;
     requires java.desktop;
+    requires io.reactivex.rxjava3;
 
     opens com.angular_manager to javafx.fxml;
+
     exports com.angular_manager;
 }
