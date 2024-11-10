@@ -8,18 +8,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.json.JSONObject;
 
-import com.angular_manager.DTO.ProjectListItemDTO;
-import com.angular_manager.enums.FileName;
+import com.angular_manager.model.DTO.ProjectListItemDTO;
+import com.angular_manager.model.enums.FileName;
 import com.angular_manager.model.json.JsonManipulator;
-import com.angular_manager.util.TerminalPrinter;
+import com.angular_manager.model.util.TerminalPrinter;
 
 import io.reactivex.rxjava3.subjects.ReplaySubject;
 
 public class AngularProjectSearcher {
 
-    // Replay subject is a hot observable that emits all values pushed to it
-    // this is a good choice because it emits all the values it stored, even for
-    // later subscribers
+    // Replay subject is a hot observable that emits all values pushed to it. This is a
+    // good choice because it emits all the values it stored, even for later subscribers
     public static final ReplaySubject<ProjectListItemDTO> angularProjectsFound = ReplaySubject.create();
 
     /*

@@ -21,7 +21,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
 
         // Calling the method that settles the initial configuration for the application
-        InitialStateConfig.setApplicationInitialState();
+        // InitialStateConfig.setApplicationInitialState();
 
         // For now the app will have only one scene
         Scene mainScene = MainScene.createMainScene();

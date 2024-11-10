@@ -2,8 +2,8 @@ package com.angular_manager.model.json;
 
 import org.json.JSONObject;
 
-import com.angular_manager.enums.ConfigJsonStructure;
-import com.angular_manager.enums.FileName;
+import com.angular_manager.model.enums.ConfigJsonStructure;
+import com.angular_manager.model.enums.FileName;
 
 /*
  * Controls the configuration json, these are configurations used by the application 

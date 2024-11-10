@@ -3,8 +3,8 @@ package com.angular_manager.view.node;
 import org.kordamp.ikonli.bootstrapicons.BootstrapIcons;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-import com.angular_manager.DTO.ProjectListItemDTO;
 import com.angular_manager.controller.AngularController;
+import com.angular_manager.model.DTO.ProjectListItemDTO;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
@@ -31,9 +31,6 @@ public class ProjectListSideBar extends ScrollPane {
         this.setFitToWidth(true); // Ensure that items stretch to fit the width
         this.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Vertical scrollbar appears when needed
 
-        if(angularController.canSeachForProjectsOnAppInit()) {
-            clearAndReloadProjectList();
-        }
     }
 
     // Adds an HBox with some options
@@ -52,7 +49,7 @@ public class ProjectListSideBar extends ScrollPane {
 
         // Registers the eventHandlers
         reloadIcon.setOnMouseClicked(e -> {
-            clearAndReloadProjectList();
+            reloadProjectList();
         });
     }
 
@@ -61,14 +58,22 @@ public class ProjectListSideBar extends ScrollPane {
         this.sideBar.getChildren().addAll(item);
     }
 
-    private void clearAndReloadProjectList(){
-        // clears all the nodes, expect the iconBar
-        this.sideBar.getChildren().remove(1, this.sideBar.getChildren().size());
+    private void reloadProjectList(){
+        clearProjectList();
 
         // After everything is cleared then the nodes can be added again
         angularController.getAllProjectsFromFile().forEach(project ->{
             addSingleProjectToSideBar(project);
         });
+    }
+
+    public void clearProjectList(){
+        // clears all the nodes, expect the iconBar
+        this.sideBar.getChildren().remove(1, this.sideBar.getChildren().size());
+    }
+
+    private void getProjectsFromJsonStorage(){
+        
     }
     
 }

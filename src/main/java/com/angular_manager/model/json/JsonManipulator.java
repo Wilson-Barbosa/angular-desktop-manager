@@ -5,8 +5,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-import com.angular_manager.enums.FileName;
-import com.angular_manager.util.TerminalPrinter;
+import com.angular_manager.model.enums.FileName;
+import com.angular_manager.model.util.TerminalPrinter;
 
 /**
  * Class that performs operations on the JSON files

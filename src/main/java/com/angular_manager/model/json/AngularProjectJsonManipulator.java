@@ -5,10 +5,10 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.angular_manager.DTO.ProjectListItemDTO;
-import com.angular_manager.enums.FileName;
-import com.angular_manager.enums.ProjectJsonStructure;
-import com.angular_manager.util.TerminalPrinter;
+import com.angular_manager.model.DTO.ProjectListItemDTO;
+import com.angular_manager.model.enums.FileName;
+import com.angular_manager.model.enums.ProjectJsonStructure;
+import com.angular_manager.model.util.TerminalPrinter;
 
 /**
  * Class that perfoms operations on the project-list.json file.
@@ -22,14 +22,14 @@ public class AngularProjectJsonManipulator extends JsonManipulator {
     }
 
     public JSONArray getProjectListAsJsonArray(){
-        // TODO it's imperative to treat the case of a null getFileAsSingleString() == null, but how can I do it?
 
+        // it's imperative to treat the case of a null getFileAsSingleString() == null, but how can I do it?
         if(getFileAsSingleString() == null) {
             // maybe I can create and new empty file I an error occurs (if the method returns null that is)
             createFile();
         }
         
-        // Then I can run the method again and, this time it will for sure return a valid string
+        // Then I can run the method again and, this time it will for sure return a valid (empty) string
         return new JSONArray(getFileAsSingleString());
     }
 
@@ -67,6 +67,7 @@ public class AngularProjectJsonManipulator extends JsonManipulator {
         }
     }
 
+    // Gets a list of projects, reads the 
     public void addProjectsToJsonFile(List<ProjectListItemDTO> projectListItemDTOs){
 
         // Only writes into if a folder and file both exist

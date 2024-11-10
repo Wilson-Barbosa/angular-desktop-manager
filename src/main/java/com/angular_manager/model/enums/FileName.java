@@ -1,4 +1,4 @@
-package com.angular_manager.enums;
+package com.angular_manager.model.enums;
 
 public enum FileName {
 

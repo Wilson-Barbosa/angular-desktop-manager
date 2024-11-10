@@ -5,10 +5,9 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import com.angular_manager.DTO.ProjectListItemDTO;
-import com.angular_manager.enums.ConfigJsonStructure;
-import com.angular_manager.enums.FileName;
-import com.angular_manager.enums.ProjectJsonStructure;
+import com.angular_manager.model.DTO.ProjectListItemDTO;
+import com.angular_manager.model.enums.FileName;
+import com.angular_manager.model.enums.ProjectJsonStructure;
 import com.angular_manager.model.json.AngularProjectJsonManipulator;
 import com.angular_manager.model.json.ConfigurationJsonManipulator;
 
@@ -43,6 +42,7 @@ public class AngularController {
         return projectListItemDTOList;
     }
 
+    
 
 
 }

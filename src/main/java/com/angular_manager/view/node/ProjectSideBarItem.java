@@ -3,7 +3,7 @@ package com.angular_manager.view.node;
 import org.kordamp.ikonli.bootstrapicons.BootstrapIcons;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-import com.angular_manager.DTO.ProjectListItemDTO;
+import com.angular_manager.model.DTO.ProjectListItemDTO;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;

@@ -1,8 +1,9 @@
 package com.angular_manager.model.config;
 
-import com.angular_manager.enums.ConfigJsonStructure;
-import com.angular_manager.enums.FileName;
 import com.angular_manager.model.AngularProjectSearcher;
+import com.angular_manager.model.enums.ConfigJsonStructure;
+import com.angular_manager.model.enums.FileName;
+import com.angular_manager.model.enums.FolderPath;
 import com.angular_manager.model.json.AngularProjectJsonManipulator;
 import com.angular_manager.model.json.ConfigurationJsonManipulator;
 
@@ -13,18 +14,18 @@ public class InitialStateConfig {
 
     // TODO This is temporary, soon I will substitue these hardcoded values
     private static final ConfigurationJsonManipulator configJson = new ConfigurationJsonManipulator(
-        "C:\\angular-manager", FileName.CONFIGURATION_JSON
+        FolderPath.DOCUMENTS_ANGULAR_MANAGER.getPath(), FileName.CONFIGURATION_JSON
     );
 
     private static final AngularProjectJsonManipulator angularJson = new AngularProjectJsonManipulator(
-        "C:\\angular-manager", FileName.PROJECT_LIST_JSON
+        FolderPath.DOCUMENTS_ANGULAR_MANAGER.getPath(), FileName.PROJECT_LIST_JSON
     );
 
     // Execute all routines here
     public static void setApplicationInitialState(){
         setConfigJsonState();
         setAngularProjectJsonState();
-        setProjectSearchInitialState();
+        // setProjectSearchInitialState();
     }
 
 

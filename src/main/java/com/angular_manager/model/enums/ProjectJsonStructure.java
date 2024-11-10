@@ -1,4 +1,4 @@
-package com.angular_manager.enums;
+package com.angular_manager.model.enums;
 /**
  * Enum that defines the structure of each item on my projec-list.jon file
  */

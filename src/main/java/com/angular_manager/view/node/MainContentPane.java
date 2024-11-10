@@ -1,14 +1,7 @@
 package com.angular_manager.view.node;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.angular_manager.DTO.ProjectListItemDTO;
-import com.angular_manager.model.json.AngularProjectJsonManipulator;
-
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+
 
 public class MainContentPane extends GridPane {
     

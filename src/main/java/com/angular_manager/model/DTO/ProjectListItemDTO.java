@@ -1,4 +1,4 @@
-package com.angular_manager.DTO;
+package com.angular_manager.model.DTO;
 
 /**
  * Models a single entry inside the ProjectList JSON file
