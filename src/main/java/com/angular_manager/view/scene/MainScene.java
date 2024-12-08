@@ -2,7 +2,7 @@ package com.angular_manager.view.scene;
 
 import com.angular_manager.view.node.Footer;
 import com.angular_manager.view.node.MainContentPane;
-import com.angular_manager.view.node.ProjectListSideBar;
+import com.angular_manager.view.node.SideBarNode;
 import com.angular_manager.view.node.TopNavBar;
 
 import javafx.scene.Scene;
@@ -18,7 +18,7 @@ public abstract class MainScene {
     public static Scene createMainScene() {
 
         // Create the SideBar
-        ProjectListSideBar sideBar = new ProjectListSideBar();
+        SideBarNode sideBar = new SideBarNode();
 
         // Create the RightScreen
         MainContentPane mainContent = new MainContentPane();
@@ -30,9 +30,9 @@ public abstract class MainScene {
 
         // Couples everything together on a BorderPane
         BorderPane borderPane = new BorderPane();
-        borderPane.setTop(new TopNavBar()); // Creates a simple navBar
+        borderPane.setTop(new TopNavBar()); 
         borderPane.setCenter(splitPane);
-        borderPane.setBottom(new Footer()); // Creates a simple footer
+        borderPane.setBottom(new Footer()); 
 
         // Adds the BorderPane to the scene
         Scene scene = new Scene(borderPane, 1000, 650);

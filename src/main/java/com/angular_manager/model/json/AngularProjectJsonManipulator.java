@@ -5,18 +5,17 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.angular_manager.model.DTO.ProjectListItemDTO;
+import com.angular_manager.model.entities.ProjectInfomationJsonModel;
 import com.angular_manager.model.enums.FileName;
 import com.angular_manager.model.enums.ProjectJsonStructure;
 import com.angular_manager.model.util.TerminalPrinter;
 
 /**
  * Class that perfoms operations on the project-list.json file.
- * Extends the super class JsonManipulator
+ * Extends the super class JsonManipulator.
  */
 public class AngularProjectJsonManipulator extends JsonManipulator {
 
-    // Constructor
     public AngularProjectJsonManipulator(String jsonDirectory, FileName fileName) {
         super(jsonDirectory, fileName);
     }
@@ -34,7 +33,7 @@ public class AngularProjectJsonManipulator extends JsonManipulator {
     }
 
     // Adds one project to list (single operation)     
-    public void addNewProject(ProjectListItemDTO projectListItemDTO){
+    public void addNewProject(ProjectInfomationJsonModel projectListItemDTO){
 
         // Only writes into if a folder and file both exist
         if(doesFolderExists() && doesFileExists()) {
@@ -54,9 +53,11 @@ public class AngularProjectJsonManipulator extends JsonManipulator {
         }
     }
 
-    // Overrides the createFile() on JsonManipulator by writting a [] inside the file.
-    // This is done so that the file will not be empty, otherwise trying to write 
-    // the key-value pairs on it will throw an error
+    /*
+     * Overrides the createFile() on JsonManipulator by writting a [] inside the file.
+     * This is done so that the file will not be empty, otherwise trying to write 
+     * the key-value pairs on it will throw an error
+     */
     @Override
     public void createFile(){
         super.createFile(); // creates the file
@@ -67,14 +68,13 @@ public class AngularProjectJsonManipulator extends JsonManipulator {
         }
     }
 
-    // Gets a list of projects, reads the 
-    public void addProjectsToJsonFile(List<ProjectListItemDTO> projectListItemDTOs){
+    public void addAllProjectsToJsonFile(List<ProjectInfomationJsonModel> projectModelList){
 
         // Only writes into if a folder and file both exist
         if(doesFolderExists() && doesFileExists()) {
-            JSONArray projectList = getProjectListAsJsonArray();
+            JSONArray jsonArray = getProjectListAsJsonArray();
         
-            projectListItemDTOs.forEach(project -> {
+            projectModelList.forEach(project -> {
                 
                 // Creates the JsonObject and assign the dto's attributes to it
                 JSONObject jsonToBeSaved = new JSONObject();
@@ -82,10 +82,10 @@ public class AngularProjectJsonManipulator extends JsonManipulator {
                 jsonToBeSaved.put(ProjectJsonStructure.PROJECT_NAME.toString(), project.getProjectName());
                 jsonToBeSaved.put(ProjectJsonStructure.PROJECT_PATH.toString(), project.getProjectPath());
         
-                projectList.put(jsonToBeSaved); // adds the project to the list
+                jsonArray.put(jsonToBeSaved); // adds the project to the list
             });
     
-            writeIntoFileByTruncanting(projectList.toString().getBytes(), getAbsolutePath());
+            writeIntoFileByTruncanting(jsonArray.toString().getBytes(), getAbsolutePath());
         } else {
             TerminalPrinter.printMessage("Could not write file, because either the folder or file do not exist.");
         }

@@ -1,21 +1,21 @@
-package com.angular_manager.model.DTO;
+package com.angular_manager.model.entities;
 
 /**
  * Models a single entry inside the ProjectList JSON file
  */
-public class ProjectListItemDTO {
+public class ProjectInfomationJsonModel {
 
     private int id;
     private String projectName;
     private String projectPath;
 
     // Empty constructor
-    public ProjectListItemDTO(){
+    public ProjectInfomationJsonModel(){
 
     }
 
     // Full-Args Constructor
-    public ProjectListItemDTO(int id, String projectName, String projectPath) {
+    public ProjectInfomationJsonModel(int id, String projectName, String projectPath) {
         this.id = id;
         this.projectName = projectName;
         this.projectPath = projectPath;

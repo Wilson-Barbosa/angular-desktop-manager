@@ -1,10 +1,13 @@
 package com.angular_manager.view.node;
 
+import java.util.List;
+
 import org.kordamp.ikonli.bootstrapicons.BootstrapIcons;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import com.angular_manager.controller.AngularController;
-import com.angular_manager.model.DTO.ProjectListItemDTO;
+import com.angular_manager.model.entities.ProjectInfomationJsonModel;
+import com.angular_manager.model.search.AngularProjectSearcher;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
@@ -14,34 +17,40 @@ import javafx.scene.layout.VBox;
 /**
  * Class that represents a left SideBar, where the project's names are displayed
  */
-public class ProjectListSideBar extends ScrollPane {
+public class SideBarNode extends ScrollPane {
 
     private final VBox sideBar = new VBox(7);
     private final AngularController angularController = new AngularController();
     
     // Create the SideBar as a VBox inside a ScrollPane
-    public ProjectListSideBar(){
+    public SideBarNode(){
         super(); // creates the ScrollPane
         super.getStyleClass().addAll("side-bar-styling"); // adds css class
         super.setContent(sideBar); // puts the vbox as the content of scrollPane
 
-        createIconBar();
-            
         // Enable scrolling
         this.setFitToWidth(true); // Ensure that items stretch to fit the width
         this.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Vertical scrollbar appears when needed
-
+        
+        createIconBar();
+            
+        reloadProjectList();
     }
 
-    // Adds an HBox with some options
 
     private void createIconBar(){
-        HBox iconBar = new HBox(3);
+        HBox iconBar = new HBox(6);
 
         FontIcon reloadIcon = new FontIcon(BootstrapIcons.ARROW_COUNTERCLOCKWISE);
         reloadIcon.getStyleClass().addAll("clickable");
 
-        iconBar.getChildren().addAll(reloadIcon);
+        FontIcon searchIcon = new FontIcon(BootstrapIcons.SEARCH);
+        searchIcon.getStyleClass().addAll("clickable");
+
+        FontIcon addNewIcon = new FontIcon(BootstrapIcons.FILE_EARMARK_PLUS);
+        addNewIcon.getStyleClass().addAll("clickable");
+
+        iconBar.getChildren().addAll(addNewIcon, searchIcon, reloadIcon);
         iconBar.setAlignment(Pos.BASELINE_RIGHT);
         iconBar.getStyleClass().add("icon-bar");
         
@@ -51,10 +60,14 @@ public class ProjectListSideBar extends ScrollPane {
         reloadIcon.setOnMouseClicked(e -> {
             reloadProjectList();
         });
+
+        searchIcon.setOnMouseClicked(e -> {
+            // TODO add the serching operation here
+        });
     }
 
-    private void addSingleProjectToSideBar(ProjectListItemDTO projectListItemDTO){
-        ProjectSideBarItem item = new ProjectSideBarItem(projectListItemDTO);
+    private void addSingleProjectToSideBar(ProjectInfomationJsonModel model){
+        SideBarItemNode item = new SideBarItemNode(model);
         this.sideBar.getChildren().addAll(item);
     }
 
@@ -70,10 +83,6 @@ public class ProjectListSideBar extends ScrollPane {
     public void clearProjectList(){
         // clears all the nodes, expect the iconBar
         this.sideBar.getChildren().remove(1, this.sideBar.getChildren().size());
-    }
-
-    private void getProjectsFromJsonStorage(){
-        
     }
     
 }

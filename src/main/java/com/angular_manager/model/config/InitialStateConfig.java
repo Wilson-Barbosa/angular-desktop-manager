@@ -1,24 +1,25 @@
 package com.angular_manager.model.config;
 
-import com.angular_manager.model.AngularProjectSearcher;
 import com.angular_manager.model.enums.ConfigJsonStructure;
 import com.angular_manager.model.enums.FileName;
 import com.angular_manager.model.enums.FolderPath;
 import com.angular_manager.model.json.AngularProjectJsonManipulator;
 import com.angular_manager.model.json.ConfigurationJsonManipulator;
+import com.angular_manager.model.search.AngularProjectSearcher;
 
 /**
- * When the application runs this class' methods will be called
+ * Class that handles the app's configuration. Methods here control how the application
+ * will be initialized, the theme or how and where information will be stored.
  */
 public class InitialStateConfig {
 
     // TODO This is temporary, soon I will substitue these hardcoded values
     private static final ConfigurationJsonManipulator configJson = new ConfigurationJsonManipulator(
-        FolderPath.DOCUMENTS_ANGULAR_MANAGER.getPath(), FileName.CONFIGURATION_JSON
+        FolderPath.C_ANGULAR_MANAGER.getPath(), FileName.CONFIGURATION_JSON
     );
 
     private static final AngularProjectJsonManipulator angularJson = new AngularProjectJsonManipulator(
-        FolderPath.DOCUMENTS_ANGULAR_MANAGER.getPath(), FileName.PROJECT_LIST_JSON
+        FolderPath.C_ANGULAR_MANAGER.getPath(), FileName.PROJECT_LIST_JSON
     );
 
     // Execute all routines here

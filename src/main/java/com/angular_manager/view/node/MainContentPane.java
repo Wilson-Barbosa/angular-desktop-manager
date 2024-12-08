@@ -1,5 +1,8 @@
 package com.angular_manager.view.node;
 
+import com.angular_manager.model.entities.ProjectiInformationModel;
+
+import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
 
@@ -7,43 +10,28 @@ public class MainContentPane extends GridPane {
     
     public MainContentPane(){
         super();
-
-        // AngularProjectJsonManipulator json = new AngularProjectJsonManipulator(
-        //     "C:\\angular-manager", "project-list.json"
-        // );
-
-        // Button createFolder = new Button("Create folder");
-        // Button createFile = new Button("Create file");
-        // Button addProject = new Button("Add Project");
-        // Button readJson = new Button("Read Json");
-
-        // HBox hBox = new HBox();
-        // hBox.getChildren().addAll(createFolder, createFile, addProject, readJson);
-        // super.getChildren().add(hBox);
-
-        // // Events
-        // createFile.setOnAction(e -> {
-        //     json.createFile();            
-        // });
+        super.getStyleClass().add("main-content"); 
         
-        // createFolder.setOnAction(e -> {
-        //     json.createFolder();
-        // });
+        // by default, the welcome node will be displayed once the MainContentPane is drawn
+        addNodeToMainContentPane(new WelcomeNode());
+        
+        // ProjectiInformationModel model = new ProjectiInformationModel();
+        // model.setName("My Angular Project");
+        // model.setLocation("Desktop:files/angular/projects");
+        // model.setVersion("1.2");
+        // model.setAngularCliVersion("17.2");
 
-        // readJson.setOnAction(e -> {
-        //     json.getAllProjectsFromFile();
-        // });
-
-        // addProject.setOnAction(e -> {
-
-        //     List<ProjectListItemDTO> projects = new ArrayList<>();
-        //     projects.add(new ProjectListItemDTO(1, "Angular e-commerce", "test path"));
-        //     projects.add(new ProjectListItemDTO(2, "Angular CRUD", "test path"));
-        //     projects.add(new ProjectListItemDTO(3, "Project car", "test path"));
-        //     projects.add(new ProjectListItemDTO(4, "todo app list", "test path"));
-
-        //     json.addProjectsToJsonFile(projects);
-        // });
+        // ProjectInformationNode node = new ProjectInformationNode(model);
+        // addNodeToMainContentPane(node);
     }
-    
+
+    private void clearMainContent(){
+        this.getChildren().clear();
+    }
+
+    public void addNodeToMainContentPane(Node node){
+        clearMainContent();
+        this.getChildren().add(node);
+    }
+
 }

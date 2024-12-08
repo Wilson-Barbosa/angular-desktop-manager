@@ -3,7 +3,7 @@ package com.angular_manager.view.node;
 import org.kordamp.ikonli.bootstrapicons.BootstrapIcons;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-import com.angular_manager.model.DTO.ProjectListItemDTO;
+import com.angular_manager.model.entities.ProjectInfomationJsonModel;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -11,17 +11,17 @@ import javafx.scene.text.Text;
 /**
  * Class that represents an Item inside a left SideBar, it displays the name of the project
  */
-public class ProjectSideBarItem extends HBox {
+public class SideBarItemNode extends HBox {
 
-    private ProjectListItemDTO projectInformation;
+    private ProjectInfomationJsonModel projectInformation;
 
     // Constructor
-    public ProjectSideBarItem(ProjectListItemDTO projectListItemDTO) {
+    public SideBarItemNode(ProjectInfomationJsonModel jsonModel) {
         super(5);
-        this.projectInformation = projectListItemDTO;
+        this.projectInformation = jsonModel;
 
         FontIcon folderIcon = new FontIcon(BootstrapIcons.FOLDER2);
-        Text projectName = new Text(projectListItemDTO.getProjectName());
+        Text projectName = new Text(jsonModel.getProjectName());
 
         folderIcon.getStyleClass().add("icon-project");
 
@@ -46,12 +46,12 @@ public class ProjectSideBarItem extends HBox {
     }
 
 
-    public ProjectListItemDTO getProjectInformation() {
+    public ProjectInfomationJsonModel getProjectInformation() {
         return projectInformation;
     }
 
-    public void setProjectInformation(ProjectListItemDTO projectInformation) {
-        this.projectInformation = projectInformation;
+    public void setProjectInformation(ProjectInfomationJsonModel jsonModel) {
+        this.projectInformation = jsonModel;
     }
 
 

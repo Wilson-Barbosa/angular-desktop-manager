@@ -5,6 +5,11 @@
             .getStyleClass().addAll("classOne", "classTwo")
 */
 
+.separator-black{
+    -fx-background-color: black;
+    /* -fx-padding: 10px 0px 20px 0px; */
+}
+
 .clickable {
     -fx-cursor: hand;
 }
@@ -40,7 +45,7 @@
     -fx-border-width: 0 0 1 0;
     -fx-border-color: #949494;
 
-    -fx-padding: 2px;
+    -fx-padding: 3px;
 
     -fx-font-size: 16px;
 }
@@ -74,4 +79,32 @@
     -fx-background-color: #cccccc;
     
     -fx-padding: 1.5px;
+}
+
+
+/*------------------------------------------------------------------------------*/
+
+.main-content {
+    -fx-padding: 5px 15px 5px 15px;
+}
+
+.welcome-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+
+    /* -fx-border-style: solid;
+    -fx-border-width: 0 0 1 0; 
+    -fx-border-color: #1f1f1f; */
+}
+
+.welcome-text {
+    -fx-font-size: 14px;
+}
+
+.project-information-label {
+    -fx-font-weight: bold;
+}
+
+.project-content {
+    -fx-font-size: 15px;
 }
