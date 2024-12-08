@@ -29,13 +29,8 @@ public class TopNavBar extends HBox {
 }
 
 class AboutLabel extends Label {
-
     public AboutLabel(String label){
         super(label);
-
-        this.setOnMouseClicked(e -> {
-            AboutDialog.displayDialog();
-        });
+        this.setOnMouseClicked(e -> AboutDialog.displayDialog());
     }
-
 }
