@@ -62,7 +62,7 @@ public class AngularProjectJsonManipulator extends JsonManipulator {
     public void createFile(){
         super.createFile(); // creates the file
 
-        if(doesFolderExists() && doesFileExists()) {
+        if(doesFolderExists() && !doesFileExists()) {
             byte[] squareBrackets = "[]".getBytes();
             writeIntoFileByTruncanting(squareBrackets, getAbsolutePath());
         }

@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import com.angular_manager.model.config.InitialStateConfig;
+import com.angular_manager.model.config.Environment;
 import com.angular_manager.view.scene.MainScene;
 
 /**
@@ -17,11 +17,11 @@ public class App extends Application {
 
     // private static Scene scene;
 
+    @SuppressWarnings("exports")
     @Override
     public void start(Stage stage) throws IOException {
 
-        // Sets ups the initial configuration like creating the folders adn etc...
-        InitialStateConfig.setApplicationInitialState();
+        Environment.setupEnvironment();
 
         // For now the app will have only one scene
         Scene mainScene = MainScene.createMainScene();

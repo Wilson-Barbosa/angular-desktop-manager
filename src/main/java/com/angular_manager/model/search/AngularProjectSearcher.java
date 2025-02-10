@@ -8,12 +8,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.json.JSONObject;
 
+import com.angular_manager.model.config.Environment;
 import com.angular_manager.model.entities.ProjectInfomationJsonModel;
 import com.angular_manager.model.enums.FileName;
 import com.angular_manager.model.exception.ThreadRunningException;
 import com.angular_manager.model.json.JsonManipulator;
 import com.angular_manager.model.util.TerminalPrinter;
 
+import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import io.reactivex.rxjava3.subjects.ReplaySubject;
 
 /**
@@ -35,6 +37,8 @@ public class AngularProjectSearcher implements Runnable {
      */
     public static final ReplaySubject<ProjectInfomationJsonModel> angularProjectsFoundSubject = ReplaySubject.create();
     
+    public static final BehaviorSubject<String> currentFileSearch = BehaviorSubject.create();
+
 
     @Override
     public void run() {
@@ -48,7 +52,6 @@ public class AngularProjectSearcher implements Runnable {
             searchThread = new Thread(() -> {
                 try {
                     searchForAngularProject();
-                    TerminalPrinter.printMessage("Project Searcher Thread is running...");
                 } finally {
                     searchThread = null;
                 }
@@ -68,15 +71,34 @@ public class AngularProjectSearcher implements Runnable {
     public static void searchForAngularProject() {
 
         try {
+
+            TerminalPrinter.printMessage("Project Searcher is running...");
+
             // variable that adds the id for each object, since I'm using a lambda expression I need to use this
             AtomicInteger id = new AtomicInteger(1); // TODO move this to the config file
 
-            Files.walk(Paths.get("W:\\")).forEach(path -> {
-                if (Files.isDirectory(path) && isFolderAnAngularProject(path)) {
-                    pushItemToReplaySubject(createFromPath(path, id.get()));
-                    id.incrementAndGet();
-                }
-            });
+            if(Environment.getOs().equals("linux")) {
+
+                Files.walk(Paths.get(System.getProperty("user.home"))).forEach(path -> {
+                    if (Files.isDirectory(path) && isFolderAnAngularProject(path)) {
+                        pushItemToReplaySubject(createFromPath(path, id.get()));
+                        id.incrementAndGet();
+
+                        System.out.println("project found at: " + path);
+                    }
+                });
+
+            } else if(Environment.getOs().equals("windowns")) {
+                Files.walk(Paths.get("W:\\")).forEach(path -> {
+                    if (Files.isDirectory(path) && isFolderAnAngularProject(path)) {
+                        pushItemToReplaySubject(createFromPath(path, id.get()));
+                        id.incrementAndGet();
+
+                        System.out.println("project found at: " + path);
+                    }
+                });
+            }
+
 
         } catch (IOException e) {
             TerminalPrinter.printMessage("An unknown error has occured");
@@ -90,7 +112,7 @@ public class AngularProjectSearcher implements Runnable {
     }
 
 
-    /*
+    /**
      * Returns true if and only if the given folder path contains an angular project.
      * The evaluation is done by some criteria like if the file has an angular.json or
      * package.json file. Other criteria may be added in the future.
@@ -125,8 +147,5 @@ public class AngularProjectSearcher implements Runnable {
         printOnTerminal(dto);
         return dto;
     }
-
-
-
 
 }

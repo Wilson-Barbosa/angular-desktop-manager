@@ -20,7 +20,7 @@ public class JsonManipulator {
     private final String directory; 
     private final String fileName; 
 
-    // Constructor
+
     public JsonManipulator(String directory, FileName fileName) {
         this.directory = directory;
         this.fileName = fileName.getName();
@@ -44,10 +44,7 @@ public class JsonManipulator {
         }
     }
 
-    /*
-     * Creates a file inside the directory (if it exists that is)
-     * By default the file will be empty
-     */
+    /** Creates an empty file inside the folder defined within this class */
     public void createFile() {
         try {
             if(!doesFolderExists()){
@@ -61,7 +58,7 @@ public class JsonManipulator {
                 TerminalPrinter.printMessage("File " + fileName + " created successfully");
             }
         } catch (Exception e) {
-            TerminalPrinter.printMessage("An error has occureed while creating " + directory + ": ");
+            TerminalPrinter.printMessage("An error has occurred while creating " + directory + ": ");
         }
     }
 

@@ -5,7 +5,6 @@ import java.util.List;
 import org.kordamp.ikonli.bootstrapicons.BootstrapIcons;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-import com.angular_manager.controller.AngularController;
 import com.angular_manager.model.entities.ProjectInfomationJsonModel;
 import com.angular_manager.model.search.AngularProjectSearcher;
 
@@ -20,7 +19,6 @@ import javafx.scene.layout.VBox;
 public class SideBarNode extends ScrollPane {
 
     private final VBox sideBar = new VBox(7);
-    private final AngularController angularController = new AngularController();
     
     // Create the SideBar as a VBox inside a ScrollPane
     public SideBarNode(){
@@ -66,7 +64,7 @@ public class SideBarNode extends ScrollPane {
         });
     }
 
-    private void addSingleProjectToSideBar(ProjectInfomationJsonModel model){
+    private void addProjectToSideBar(ProjectInfomationJsonModel model){
         SideBarItemNode item = new SideBarItemNode(model);
         this.sideBar.getChildren().addAll(item);
     }
@@ -75,9 +73,6 @@ public class SideBarNode extends ScrollPane {
         clearProjectList();
 
         // After everything is cleared then the nodes can be added again
-        angularController.getAllProjectsFromFile().forEach(project ->{
-            addSingleProjectToSideBar(project);
-        });
     }
 
     public void clearProjectList(){
